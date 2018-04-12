@@ -987,7 +987,8 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('articles', __webpack_require__(38));
+Vue.component('posts', __webpack_require__(38));
+Vue.component('navbar', __webpack_require__(52));
 
 var app = new Vue({
     el: '#app',
@@ -43084,7 +43085,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 var disposed = false
 var normalizeComponent = __webpack_require__(39)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(54)
 /* template */
 var __vue_template__ = __webpack_require__(40)
 /* template functional */
@@ -43103,7 +43104,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Articles.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Posts.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43112,9 +43113,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4398db98", Component.options)
+    hotAPI.createRecord("data-v-3e5f8528", Component.options)
   } else {
-    hotAPI.reload("data-v-4398db98", Component.options)
+    hotAPI.reload("data-v-3e5f8528", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43241,7 +43242,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h2", [_vm._v("Articles")])
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("Posts")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addPost($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.post.title,
+                  expression: "post.title"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "enter title", required: "" },
+              domProps: { value: _vm.post.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.post, "title", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.post.body,
+                  expression: "post.body"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "enter body", required: "" },
+              domProps: { value: _vm.post.body },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.post, "body", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-success", attrs: { type: "submit" } },
+            [_vm._v("Insert")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", { class: [{ disabled: !_vm.pagination.prev_page_url }] }, [
+          _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  _vm.fetchPosts(_vm.pagination.prev_page_url)
+                }
+              }
+            },
+            [_vm._v("prev")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "disabled" }, [
+          _c("a", [
+            _vm._v(
+              "Page " +
+                _vm._s(_vm.pagination.currrent_page) +
+                " of " +
+                _vm._s(_vm.pagination.last_page)
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { class: [{ disabled: !_vm.pagination.next_page_url }] }, [
+          _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  _vm.fetchPosts(_vm.pagination.next_page_url)
+                }
+              }
+            },
+            [_vm._v("next")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.posts, function(post) {
+        return _c("div", { staticClass: "jumbotron" }, [
+          _c("h3", [_vm._v(_vm._s(post.title))]),
+          _vm._v("\n        " + _vm._s(post.body) + "\n       "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.deletepost(post.postId)
+                }
+              }
+            },
+            [_vm._v("delete")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.editpost(post.postId, post.title, post.body)
+                }
+              }
+            },
+            [_vm._v("edit")]
+          )
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43249,7 +43398,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4398db98", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3e5f8528", module.exports)
   }
 }
 
@@ -43258,6 +43407,261 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(39)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(53)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Navbar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cd7fb372", Component.options)
+  } else {
+    hotAPI.reload("data-v-cd7fb372", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "navbar navbar-inverse" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "navbar-header" }, [
+          _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+            _vm._v("WebSiteName")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "nav navbar-nav" }, [
+          _c("li", { staticClass: "active" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+          ]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Page 1")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Page 2")])]),
+          _vm._v(" "),
+          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Page 3")])])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cd7fb372", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            posts: [],
+            post: {
+                postId: '',
+                title: '',
+                body: ''
+            },
+            postId: '',
+            pagination: {},
+            edit: false
+        };
+    },
+    created: function created() {
+        this.fetchPosts();
+    },
+
+    methods: {
+        fetchPosts: function fetchPosts(page_url) {
+            var _this = this;
+
+            page_url = page_url || 'api/posts';
+            var vm = this;
+            fetch(page_url).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this.posts = res.data;
+                // console.log(res);
+                vm.makePagination(res.meta, res.links);
+            }).catch(function (err) {
+                return console.log(err);
+            });
+        },
+        makePagination: function makePagination(meta, links) {
+            var pagination = {
+                currrent_page: meta.current_page,
+                last_page: meta.last_page,
+                next_page_url: links.next,
+                prev_page_url: links.prev
+
+            };
+            this.pagination = pagination;
+        },
+        addPost: function addPost() {
+            var _this2 = this;
+
+            if (this.edit == true) {
+                fetch('api/post', {
+                    method: 'put',
+                    body: JSON.stringify(this.post),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
+                    _this2.post.title = '';
+                    _this2.post.body = '';
+                    _this2.post.postId = '';
+                    _this2.edit = false;
+                    alert('Post Edited Successfully');
+                    _this2.fetchPosts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            } else {
+                fetch('api/post', {
+                    method: 'post',
+                    body: JSON.stringify(this.post),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
+                    _this2.post.title = '';
+                    _this2.post.body = '';
+                    _this2.post.postId = '';
+                    alert('Post Added Successfully');
+                    _this2.fetchPosts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            }
+        },
+        editpost: function editpost(id, title, body) {
+            this.edit = true;
+            this.post.postId = id;
+            this.post.title = title;
+            this.post.body = body;
+        },
+        deletepost: function deletepost(id) {
+            var _this3 = this;
+
+            if (confirm('Aru you sure ?')) {
+                fetch('api/post/' + id, {
+                    method: 'delete'
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (res) {
+
+                    alert('Post Deleted Successfully');
+                    _this3.fetchPosts();
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            }
+        }
+    }
+
+});
 
 /***/ })
 /******/ ]);

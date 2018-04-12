@@ -22,37 +22,9 @@
     </head>
     <body>
        <div id="app">
+           <navbar></navbar>
            <div class="container">
-               <articles></articles>
-               {{--Exercise 1--}}
-               <h2>Test 1</h2>
-               <p>VueJS is pretty cool - @{{name}} (@{{age}})</p>
-               <div>
-                   <img style="width:100px;height:100px" v-bind:src="img">
-               </div> &nbsp;
-               <div>
-                   <input type="text" v-bind:value="name">
-               </div><br>
-               <button v-on:click="increase">Click Me</button>
-               <p>@{{counter}}</p>
-               {{--End Exercise 1--}}
-
-               {{--Exercise 2--}}
-               <h2>Test 2</h2>
-           <!-- 1) Show an alert when the Button gets clicked -->
-               <div>
-                   <button v-on:click="showAlert">Show Alert</button>
-               </div><br>
-
-               <!-- 2) Listen to the "keydown" event and store the value in a data property (hint: event.target.value gives you the value) -->
-               <div>
-                   <input type="text" v-on:keyup="pressed">
-                   <p>@{{ value }}</p>
-               </div>
-               <!-- 3) Adjust the example from 2) to only fire if the "key down" is the ENTER key -->
-               <div>
-                   <input type="text" v-on:keyup.enter="pressed">
-               </div>
+               <posts></posts>
 
            </div>
        </div>
