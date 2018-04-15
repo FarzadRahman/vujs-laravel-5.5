@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//For Direct URL Hit
+Route::get('/{home?}', function () {
+    return view('welcome');
+})->where('vue_capture', '[\/\w\.-]*');
+Route::get('/{posts?}', function () {
+    return view('welcome');
+})->where('vue_capture', '[\/\w\.-]*');
